@@ -1,5 +1,6 @@
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../utils/theme'
+import '../utils/style.css'
 
 export default function MyApp({ Component, pageProps }) {
   return <ThemeProvider theme={theme}>

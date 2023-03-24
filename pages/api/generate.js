@@ -15,10 +15,11 @@
 import { answer1, answer2, answer3, answer4 } from '../../lib/mocks'
 
 const parseChapter = answer => {
-  const pgn = answer.match(/(?<=PGN_START\s*).*?(?=\s*PGN_END)/gs)[0]
+  const pgnMatch = answer.match(/(?<=PGN_START\s*).*?(?=\s*PGN_END)/gs)[0]
   const description = answer.match(/(?<=PGN_END\s*).*/gs)[0]
+  const pgn = pgnMatch.replace(/\n/g, "").trim()
   return {
-    pgn: pgn.replace(/\n/g, "").trim(),
+    pgn: pgn.startsWith('1. ') ? pgn : `1. ${pgn}`,
     description: description.replace(/\n/g, "").trim().replace('CHAPTER_END', ''),
   }
 }

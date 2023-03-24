@@ -1,13 +1,24 @@
-import React, { useEffect } from 'react'
-import { Chessboard } from "react-chessboard" // https://www.npmjs.com/package/react-chessboard
+import React, { useEffect, useState } from 'react'
+import ChessAnalysisBoard from 'react-chess-analysis-board'
 
 const TheoryTab = ({ data }) => {
-  useEffect(() => {
-
-  }, [data])
-
   return <div style={{ width: '400px' }}>
-    <Chessboard id="BasicBoard" />
+    <ChessAnalysisBoard
+		pgnString={`[Event "Chess Fitness"]
+      [Site "Opening Name"]
+      [Date "????.??.??"]
+      [EventDate "?"]
+      [Round "?"]
+      [Result "?"]
+      [White "White"]
+      [Black "Black"]
+      [ECO "C52"]
+      [WhiteElo "?"]
+      [BlackElo "?"]
+      [PlyCount "?"]
+
+      ${data.pgn}`}
+    />
   </div>
 }
 
