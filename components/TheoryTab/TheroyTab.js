@@ -15,14 +15,14 @@ const TheoryTab = ({ data }) => {
     [BlackElo "?"]
     [PlyCount "?"]
 
-    ${data.pgn}`
+    ${data.chapter1.pgn}`
     console.log(pgn)
   return <div>
     <ChessAnalysisBoard
       pgnString={pgn}
       getAnalysisPosition={e => console.log(e)}
     />
-    {data.description}
+    {data.chapter1.description}
   </div>
 }
 
