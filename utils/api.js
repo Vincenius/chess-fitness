@@ -1,11 +1,11 @@
-export const getOpeningData = async input => {
+export const getOpeningData = async opening => {
   try {
     const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ opening: input }),
+      body: JSON.stringify(opening),
     });
 
     const data = await response.json();

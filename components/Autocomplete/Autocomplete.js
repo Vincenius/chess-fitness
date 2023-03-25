@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Grid from '@mui/material/Grid';
@@ -7,18 +6,59 @@ import Typography from '@mui/material/Typography';
 import { debounce } from '@mui/material/utils';
 import { search } from '../../utils/api'
 
-export default function OpeningAutocomplete() {
-  const [value, setValue] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState('');
-  const [options, setOptions] = React.useState([]);
-  const loaded = React.useRef(false);
+const defaultOpenings = [{
+    "eco": "C42",
+    "name": "Russian Game: Stafford Gambit",
+    "pgn": "1. e4 e5 2. Nf3 Nf6 3. Nxe5 Nc6"
+}, {
+  "eco": "A48",
+  "name": "London System",
+  "pgn": "1. d4 Nf6 2. Nf3 g6 3. Bf4"
+}, {
+  "eco": "B20",
+  "name": "Sicilian Defense",
+  "pgn": "1. e4 c5"
+}, {
+  "eco": "C00",
+  "name": "French Defense",
+  "pgn": "1. e4 e6 2. d4 d5"
+}, {
+  "eco": "D06",
+  "name": "Queen's Gambit",
+  "pgn": "1. d4 d5 2. c4"
+}, {
+  "eco": "A10",
+  "name": "English Opening",
+  "pgn": "1. c4"
+}, {
+  "eco": "C25",
+  "name": "Vienna Game",
+  "pgn": "1. e4 e5 2. Nc3"
+}, {
+  "eco": "C50",
+  "name": "Italian Game",
+  "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4"
+}, {
+  "eco": "C60",
+  "name": "Ruy Lopez",
+  "pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5"
+}, {
+  "eco": "B10",
+  "name": "Caro-Kann Defense",
+  "pgn": "1. e4 c6 2. Nc3"
+}]
+
+export default function OpeningAutocomplete({ onSelect }) {
+  const [inputValue, setInputValue] = React.useState('')
+  const [options, setOptions] = React.useState([])
+  const [value, setValue] = React.useState('')
 
   const fetch = React.useMemo(
     () =>
       debounce(async ({ input }, callback) => {
         const { openings } = await search(input)
         callback(openings)
-      }, 400),
+      }, 300),
     [],
   );
 
@@ -26,17 +66,14 @@ export default function OpeningAutocomplete() {
     let active = true;
 
     if (inputValue === '') {
-      setOptions(value ? [value] : []);
+      // todo default options
+      setOptions(defaultOpenings);
       return undefined;
     }
 
     fetch({ input: inputValue }, (results) => {
       if (active) {
         let newOptions = [];
-
-        if (value) {
-          newOptions = [value];
-        }
 
         if (results) {
           newOptions = [...newOptions, ...results];
@@ -49,31 +86,30 @@ export default function OpeningAutocomplete() {
     return () => {
       active = false;
     };
-  }, [value, inputValue, fetch]);
+  }, [inputValue, fetch]);
 
   return (
     <Autocomplete
       id="autocomplete"
-      sx={{ width: 300 }}
+      sx={{ width: '100%' }}
       getOptionLabel={(option) =>
         typeof option === 'string' ? option : option.description
       }
       filterOptions={(x) => x}
       options={options}
-      autoComplete
-      includeInputInList
-      filterSelectedOptions
       value={value}
-      noOptionsText="search for an opening"
+      autoComplete
+      filterSelectedOptions
+      noOptionsText="no openings found..."
       onChange={(event, newValue) => {
-        setOptions(newValue ? [newValue, ...options] : options);
-        setValue(newValue);
+        onSelect(newValue)
+        setValue((newValue && newValue.name) || '')
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
       }}
       renderInput={(params) => (
-        <TextField {...params} label="Add a location" fullWidth />
+        <TextField {...params} label="Search an opening" fullWidth />
       )}
       renderOption={(props, option) => {
         return (
@@ -81,7 +117,7 @@ export default function OpeningAutocomplete() {
             <Grid container alignItems="center">
               <Grid item sx={{ width: 'calc(100% - 44px)', wordWrap: 'break-word' }}>
                 <Typography variant="body2" color="text.secondary">
-                  {option.name}
+                  {option.name} [<i>{option.pgn}</i> ]
                 </Typography>
               </Grid>
             </Grid>
