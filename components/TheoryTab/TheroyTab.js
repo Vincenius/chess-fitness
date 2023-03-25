@@ -22,6 +22,7 @@ const TheoryTab = ({ data }) => {
       pgnString={pgn}
       getAnalysisPosition={e => console.log(e)}
     />
+    {data.description}
   </div>
 }
 
