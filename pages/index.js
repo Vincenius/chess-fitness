@@ -27,11 +27,12 @@ export default function Home() {
     <div>
       <Head>
         <title>Chess Fitness</title>
+        <link rel="icon" href="logo.svg" />
       </Head>
 
       <main className={styles.main}>
         { !isLoading && !data && <>
-          <Image src="/logo.svg" height={200} width={200} style={{ margin: '0 auto 10px' }} />
+          <Image src="/logo.svg" height={200} width={200} style={{ margin: '0 auto 10px' }} alt="strong chess piece logo"/>
           <Typography variant="h3" textAlign="center" gutterBottom>Chess Fitness</Typography>
 
           <form className={styles.form}>

@@ -91,7 +91,7 @@ export default function OpeningAutocomplete({ onSelect }) {
   return (
     <Autocomplete
       id="autocomplete"
-      sx={{ width: '100%' }}
+      sx={{ width: '100%', background: '#fff' }}
       getOptionLabel={(option) =>
         typeof option === 'string' ? option : option.description
       }
