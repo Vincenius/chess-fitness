@@ -1,28 +1,34 @@
 import React, { useEffect, useState } from 'react'
-import ChessAnalysisBoard from 'react-chess-analysis-board'
+import Button from '@mui/material/Button'
+import Typography from "@mui/material/Typography"
+import ChessBoard from '../ChessBoard/ChessBoard'
+import styles from './TheoryTab.module.css'
 
 const TheoryTab = ({ data }) => {
-  const pgn = `[Event "Chess Fitness"]
-    [Site "${data.opening.name}"]
-    [Date "${new Date().toISOString().slice(0, 10)}"]
-    [EventDate "?"]
-    [Round "?"]
-    [Result "?"]
-    [White "White"]
-    [Black "Black"]
-    [ECO "${data.opening.eco}"]
-    [WhiteElo "?"]
-    [BlackElo "?"]
-    [PlyCount "?"]
+  const [pgnData, setPgnData] = useState(data.opening.pgn)
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    setPgnData(data.opening.pgn + ' 1-0') // tiny hack to force re-render of board
+  }, [])
 
-    ${data.chapter1.pgn}`
-    console.log(pgn)
-  return <div>
-    <ChessAnalysisBoard
-      pgnString={pgn}
-      getAnalysisPosition={e => console.log(e)}
-    />
-    {data.chapter1.description}
+  const pgn = `${pgnData}`
+
+  return <div className={styles.container}>
+    <ChessBoard pgn={pgn} />
+
+    <aside className={styles.description}>
+      <div>
+        <Typography gutterBottom variant="h5">Introduction</Typography>
+        {data.chapter1.description.split("\n").map((i,key) => {
+            return <p key={key}>{i}</p>;
+        })}
+      </div>
+
+      <div className={styles.buttonContainer}>
+        <Button>Analyse on Lichess</Button>
+        <Button variant="contained">Next Chapter</Button>
+      </div>
+    </aside>
   </div>
 }
 

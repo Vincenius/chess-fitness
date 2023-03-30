@@ -1,0 +1,20 @@
+.boardContainer {
+  width: 500px;
+}
+
+@media screen and (max-width: 900px) {
+  .boardContainer {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .boardContainer {
+    width: 100%;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  margin-bottom: 0.5em;
+}

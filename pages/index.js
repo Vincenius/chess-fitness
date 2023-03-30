@@ -16,6 +16,7 @@ export default function Home() {
 
   const onSubmit = async opening => {
     if (opening && opening.name) {
+      setData(null)
       setIsLoading(true)
       const result = await getOpeningData(opening) // todo also pass pgn
       setData({ opening, ...result })
@@ -34,15 +35,14 @@ export default function Home() {
         { !isLoading && !data && <>
           <Image src="/logo.svg" height={200} width={200} style={{ margin: '0 auto 10px' }} alt="strong chess piece logo"/>
           <Typography variant="h3" textAlign="center" gutterBottom>Chess Fitness</Typography>
-
-          <form className={styles.form}>
-            <Autocomplete onSelect={val => onSubmit(val)}/>
-          </form>
-          <Typography gutterBottom variant="overline">Enter the name of any opening you want to learn</Typography>
         </> }
+        <form className={styles.form}>
+          <Autocomplete onSelect={val => onSubmit(val)} />
+        </form>
+        { !isLoading && !data && <Typography gutterBottom variant="overline">Enter the name of any opening you want to learn</Typography> }
 
         { isLoading && <>
-          <Image src="/loading.gif" height={400} width={400} style={{ margin: '0 auto' }}  />
+          <Image src="/loading.gif" height={400} width={400} style={{ margin: '0 auto' }} alt="loading animation" />
         </> }
 
         { data && <div>

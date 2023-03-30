@@ -3,7 +3,7 @@ body {
 }
 
 .panel-container {
-  width: 560px;
+  min-width: 300px;
   display: flex;
   border-style: solid;
   align-items: center;
@@ -39,7 +39,7 @@ body {
 }
 
 .RCAB-panel-container {
-  width: 560px;
+  min-width: 300px;
   display: flex;
   border-style: solid;
   align-items: center;
@@ -54,7 +54,7 @@ body {
 .RCAB-analysis-board-container {
   outline: none;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 /*
@@ -64,14 +64,13 @@ Moves
 */
 
 .RCAB-moves-container {
-  padding: 48px;
-  width: 24vw;
+  padding: 1em;
 }
 
 /* Root */
 .RCAB-root-active-node {
   cursor: pointer;
-  color: black; 
+  color: black;
 }
 
 .RCAB-root-active-node-selected {

@@ -5,9 +5,10 @@ const parseChapter = answer => {
   const pgnMatch = answer.match(/(?<=PGN_START\s*).*?(?=\s*PGN_END)/gs)[0]
   const description = answer.match(/(?<=PGN_END\s*).*/gs)[0]
   const pgn = pgnMatch.replace(/\n/g, " ").trim()
+  console.log(description)
   return {
     pgn: pgn.startsWith('1. ') ? pgn : `1. ${pgn}`,
-    description: description.replace(/\n/g, "").trim().replace('CHAPTER_END', ''),
+    description: description.trim().replace('CHAPTER_END', ''),
   }
 }
 

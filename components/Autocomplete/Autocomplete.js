@@ -93,7 +93,7 @@ export default function OpeningAutocomplete({ onSelect }) {
       id="autocomplete"
       sx={{ width: '100%', background: '#fff' }}
       getOptionLabel={(option) =>
-        typeof option === 'string' ? option : option.description
+        typeof option === 'string' ? option : option.name
       }
       filterOptions={(x) => x}
       options={options}
@@ -113,7 +113,7 @@ export default function OpeningAutocomplete({ onSelect }) {
       )}
       renderOption={(props, option) => {
         return (
-          <li {...props}>
+          <li {...props} key={option.pgn}>
             <Grid container alignItems="center">
               <Grid item sx={{ width: 'calc(100% - 44px)', wordWrap: 'break-word' }}>
                 <Typography variant="body2" color="text.secondary">
