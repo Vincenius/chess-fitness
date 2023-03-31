@@ -1,6 +1,30 @@
 export const getOpeningData = async opening => {
   try {
-    const response = await fetch("/api/generate", {
+    const response = await fetch("/api/generate?part=introduction", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(opening),
+    });
+
+    const data = await response.json();
+    if (response.status !== 200) {
+      throw data.error || new Error(`Request failed with status ${response.status}`);
+    }
+
+    return data
+  } catch(error) {
+    // Consider implementing your own error handling logic here
+    console.error(error);
+    alert(error.message);
+    return null
+  }
+}
+
+export const getChapters = async opening => {
+  try {
+    const response = await fetch("/api/generate?part=chapters", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

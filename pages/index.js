@@ -1,26 +1,31 @@
 import Head from "next/head";
 import { useState } from "react"
 import Image from "next/image"
-import TextField from "@mui/material/TextField"
 import Typography from "@mui/material/Typography"
-import Button from "@mui/material/Button"
 import styles from "./index.module.css"
-import { getOpeningData } from '../utils/api'
+import { getOpeningData, getChapters } from '../utils/api'
 import TheoryTab from "../components/TheoryTab/TheroyTab"
 import Autocomplete from '../components/Autocomplete/Autocomplete'
 
 export default function Home() {
-  const [opening, setOpening] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [isChapterLoading, setIsChapterLoading] = useState(false)
   const [data, setData] = useState()
 
   const onSubmit = async opening => {
     if (opening && opening.name) {
-      setData(null)
+      setData({ opening })
       setIsLoading(true)
-      const result = await getOpeningData(opening) // todo also pass pgn
+      const result = await getOpeningData(opening)
       setData({ opening, ...result })
       setIsLoading(false)
+
+      if (!result.chapter1 || !result.chapter2) {
+        setIsChapterLoading(true)
+        const chapterResult = await getChapters(opening)
+        setData({ ...data, ...chapterResult })
+        setIsChapterLoading(false)
+      }
     }
   }
 
@@ -41,12 +46,8 @@ export default function Home() {
         </form>
         { !isLoading && !data && <Typography gutterBottom variant="overline">Enter the name of any opening you want to learn</Typography> }
 
-        { isLoading && <>
-          <Image src="/loading.gif" height={400} width={400} style={{ margin: '0 auto' }} alt="loading animation" />
-        </> }
-
-        { data && <div>
-          <TheoryTab data={data} />
+        { (data || isLoading) && <div>
+          <TheoryTab data={data} isChapterLoading={isChapterLoading} isLoading={isLoading} />
         </div>}
       </main>
     </div>
