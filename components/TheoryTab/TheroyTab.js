@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Image from "next/image"
+import Link from "next/link"
 import Button from '@mui/material/Button'
 import Typography from "@mui/material/Typography"
 import ChessBoard from '../ChessBoard/ChessBoard'
@@ -12,8 +13,6 @@ const TheoryTab = ({ data, isChapterLoading, isLoading }) => {
   const [subChapterIndex, setSubChapterIndex] = useState(0)
   const loading = (isChapterLoading && chapter.index > 0) || isLoading
     || (!chapter.data && chapter.index !== 3)
-
-  console.log(chapter)
 
   useEffect(() => {
     if (data.introduction && !chapter.data) {
@@ -97,13 +96,24 @@ const TheoryTab = ({ data, isChapterLoading, isLoading }) => {
 
         <div className={styles.buttonContainer}>
           {/* todo disabled */}
-          <Button onClick={prevChapter}>Previous Chapter</Button>
+          <Button onClick={prevChapter} disabled={chapter.index === 0}>Previous Chapter</Button>
           <Button variant="contained" onClick={nextChapter}>Next Chapter</Button>
         </div>
       </> }
       {chapter.index === 3 && <>
         <Typography gutterBottom variant="h5">{chapter.title}</Typography>
-        <p>Hier muss noch ein bisschen abschluss text hin und so weiter</p>
+        <p>That's it! I hope you enjoyed the lesson.</p>
+        <p>I'd love to hear your feedback. You can reach me via <a href="mailto:info@wweb.dev">Email</a>, <a href="https://twitter.com/wweb_dev">Twitter</a> or on <a href="https://github.com/Vincenius/chess-fitness/issues">GitHub</a>.</p>
+        <p>You can also subscribe to the newsletter below to get notified if something new gets added here. No worries I'll never send you spam.</p>
+        <p>P.S. I'm paying for every request to the AI. Any help paying the running costs is greatly appreciated. It helps me keeping this website running for free 👇</p>
+
+        <Link href='https://ko-fi.com/Y8Y7JYCS3' target='_blank'>
+          <img style={{ height: '38px', marginBottom: '1em' }} src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' alt='Buy Me a Coffee at ko-fi.com' />
+        </Link>
+
+        <div>
+          <Button onClick={prevChapter}>Previous Chapter</Button>
+        </div>
       </> }
     </aside> }
   </div>
