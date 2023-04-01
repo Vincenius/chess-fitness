@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "generate": "node lib/generate-all.js"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -24,5 +25,8 @@
   },
   "engines": {
     "node": ">=14.6.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3"
   }
 }
