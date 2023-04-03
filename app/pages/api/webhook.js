@@ -21,6 +21,6 @@ export default async function (req, res) {
 
     res.status(200).send({ })
   } else {
-    res.status(401).send('Unauthorized')
+    res.status(401).send({ status: 'Unauthorized' })
   }
 }

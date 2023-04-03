@@ -2,7 +2,7 @@
   "apps": [
       {
           "name": "chess-fitness",
-          "script": "nodemon",
+          "script": "node",
           "args": "index.js",
           "env": {
               "NODE_ENV": "production"
