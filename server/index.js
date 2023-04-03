@@ -26,6 +26,10 @@ const callWebhook = body => fetch(`${process.env.WEBHOOK_URL}`, {
   body: JSON.stringify(body),
 }).then(res => res.json())
 
+app.get('/', (req, res) => {
+  res.status(200).send('Running!')
+})
+
 app.post('/generate', async (req, res) => {
   if (req.headers[process.env.AUTH_HEADER] === process.env.AUTH_TOKEN) {
     const id = uuidv4()
