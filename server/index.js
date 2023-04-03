@@ -36,17 +36,19 @@ app.post('/generate', async (req, res) => {
     const body = req.body
     res.status(200).send({ id })
 
-    console.log('Generated intro:', body)
-    const message = await generateIntroduction(body)
-    await callWebhook({ id, result: { introduction: message } })
+    console.log(process.env.WEBHOOK_URL, process.env.AUTH_HEADER, process.env.AUTH_TOKEN)
+    await callWebhook({ id, result: { } })
+    // console.log('Generated intro:', body)
+    // const message = await generateIntroduction(body)
+    // await callWebhook({ id, result: { introduction: message } })
 
-    console.log('Generated chapters:', body)
-    const [chapter1, chapter2] = await Promise.all([
-      generateChapter1(body, message),
-      generateChapter2(body, message)
-    ])
+    // console.log('Generated chapters:', body)
+    // const [chapter1, chapter2] = await Promise.all([
+    //   generateChapter1(body, message),
+    //   generateChapter2(body, message)
+    // ])
 
-    await callWebhook({ id, result: { chapter1, chapter2 } })
+    // await callWebhook({ id, result: { chapter1, chapter2 } })
     console.log('generation complete')
   } else {
     res.status(401).send('Unauthorized')
