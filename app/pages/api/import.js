@@ -1,5 +1,5 @@
-import fs from 'fs'
-import { initOpenings } from '../../lib/database'
+// import fs from 'fs'
+// import { initOpenings } from '../../lib/database'
 
 // temp function to import openings to database
 export default async function (req, res) {
@@ -11,9 +11,9 @@ export default async function (req, res) {
 
   // const data = [...data1,...data2,...data3,...data4,...data5]
   // console.log(data[0])
-  await initOpenings()
+  // await initOpenings()
 
-  console.log('YOYO')
+  // console.log('YOYO')
 
   res.status(200).json({ })
 }

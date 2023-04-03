@@ -3,28 +3,46 @@ import { useState } from "react"
 import Image from "next/image"
 import Typography from "@mui/material/Typography"
 import styles from "./index.module.css"
-import { getOpeningData, getChapters } from '../utils/api'
+import { getOpeningData, refreshData } from '../utils/api'
 import TheoryTab from "../components/TheoryTab/TheroyTab"
 import Autocomplete from '../components/Autocomplete/Autocomplete'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
-  const [isChapterLoading, setIsChapterLoading] = useState(false)
   const [data, setData] = useState()
 
+  const reloadData = (generationId, opening) => {
+    setTimeout(async () => {
+      const result = await refreshData(generationId)
+
+      if (result.introduction && (!data || !data.introduction)) {
+        setData({ opening, ...result })
+        setIsLoading(true)
+      }
+      if (result.chapter1) {
+        setData({ opening, ...result })
+        setIsLoading(false)
+      }
+      if (!result.chapter1) {
+        reloadData(result.generation_id, opening)
+      }
+    }, 2000);
+  }
+
   const onSubmit = async opening => {
+    setData(null)
     if (opening && opening.name) {
       setData({ opening })
       setIsLoading(true)
-      const result = await getOpeningData(opening)
-      setData({ opening, ...result })
-      setIsLoading(false)
 
-      if (!result.chapter1 || !result.chapter2) {
-        setIsChapterLoading(true)
-        const chapterResult = await getChapters(opening)
-        setData({ ...data, ...chapterResult })
-        setIsChapterLoading(false)
+      const result = await getOpeningData(opening)
+
+      setData({ opening, ...result })
+
+      if (!result.chapter1) {
+        reloadData(result.generation_id, opening)
+      } else {
+        setIsLoading(false)
       }
     }
   }
@@ -47,7 +65,7 @@ export default function Home() {
         { !isLoading && !data && <Typography gutterBottom variant="overline">Enter the name of any opening you want to learn</Typography> }
 
         { (data || isLoading) && <div>
-          <TheoryTab data={data} isChapterLoading={isChapterLoading} isLoading={isLoading} />
+          <TheoryTab data={data} isLoading={isLoading} />
         </div>}
       </main>
     </div>

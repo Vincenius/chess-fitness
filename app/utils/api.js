@@ -1,6 +1,6 @@
 export const getOpeningData = async opening => {
   try {
-    const response = await fetch("/api/generate?part=introduction", {
+    const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,14 +22,14 @@ export const getOpeningData = async opening => {
   }
 }
 
-export const getChapters = async opening => {
+export const refreshData = async id => {
   try {
-    const response = await fetch("/api/generate?part=chapters", {
+    const response = await fetch("/api/refresh", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(opening),
+      body: JSON.stringify({ id }),
     });
 
     const data = await response.json();
