@@ -1,0 +1,12 @@
+{
+  "apps": [
+      {
+          "name": "chess-fitness",
+          "script": "nodemon",
+          "args": "index.js",
+          "env": {
+              "NODE_ENV": "production"
+          }
+      }
+  ]
+}
