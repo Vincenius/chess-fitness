@@ -8,6 +8,8 @@ export default async function (req, res) {
     const query = { [`${versionString}.generation_id`]: req.body.id }
     const [openingData = {}] = await getOpeningByQuery(query)
 
+    console.log('yoyo', query, openingData)
+
     await updateOpeningByQuery(query, { [versionString]: {
       ...(openingData[versionString] || {}),
       ...(req.body.result || {})
