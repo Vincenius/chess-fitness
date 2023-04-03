@@ -3,12 +3,10 @@ import { updateOpeningByQuery, getOpeningByQuery } from '../../lib/database'
 const versionString = process.env.MODEL_VERSION.replace('.','-')
 
 export default async function (req, res) {
-  console.log('CALLED', req.body)
-  if (req.headers[process.env.AUTH_HEADER] === process.env.AUTH_TOKEN) {
+  console.log('CALLED', req.body) // check why body is empty
+  if (req.headers[process.env.AUTH_HEADER] === process.env.AUTH_TOKEN && req.body && req.body.id) {
     const query = { [`${versionString}.generation_id`]: req.body.id }
     const [openingData = {}] = await getOpeningByQuery(query)
-
-    console.log('yoyo', query, openingData)
 
     await updateOpeningByQuery(query, { [versionString]: {
       ...(openingData[versionString] || {}),
