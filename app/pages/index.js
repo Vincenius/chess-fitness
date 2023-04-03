@@ -26,7 +26,7 @@ export default function Home() {
       if (!result.chapter1) {
         reloadData(result.generation_id, opening)
       }
-    }, 2000);
+    }, 4000);
   }
 
   const onSubmit = async opening => {
