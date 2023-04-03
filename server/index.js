@@ -35,15 +35,14 @@ app.post('/generate', async (req, res) => {
     res.status(200).send({ id })
 
     console.log('Generated intro:', body)
-    const message = "{'testy': 'testy'}"// await generateIntroduction(body)
+    const message = await generateIntroduction(body)
     await callWebhook({ id, result: { introduction: message } })
 
     console.log('Generated chapters:', body)
-    // const [chapter1, chapter2] = await Promise.all([
-    //   generateChapter1(body, message),
-    //   generateChapter2(body, message)
-    // ])
-    const [chapter1, chapter2] = ["{'testy': 'testy'}", "{'testy': 'testy'}"]
+    const [chapter1, chapter2] = await Promise.all([
+      generateChapter1(body, message),
+      generateChapter2(body, message)
+    ])
 
     await callWebhook({ id, result: { chapter1, chapter2 } })
     console.log('generation complete')

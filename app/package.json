@@ -24,9 +24,6 @@
     "react-dom": "^18.2.0",
     "sass": "^1.60.0"
   },
-  "engines": {
-    "node": ">=14.6.0"
-  },
   "devDependencies": {
     "dotenv": "^16.0.3"
   }
