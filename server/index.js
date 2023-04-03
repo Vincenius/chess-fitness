@@ -1,9 +1,5 @@
-// const express = require('express')
-// const app = express()
-// const dotenv = require('dotenv')
-// const { v4: uuidv4 } = require('uuid');
-// const fetch = require('node-fetch');
 import express from 'express'
+import cors from 'cors'
 
 import dotenv from 'dotenv'
 import { v4 as uuidv4 } from 'uuid'
@@ -12,6 +8,8 @@ import { generateIntroduction, generateChapter1, generateChapter2 } from './help
 
 const app = express()
 app.use(express.json())
+app.use(cors())
+app.options('*', cors())
 
 dotenv.config()
 
