@@ -5,8 +5,8 @@ const versionString = process.env.MODEL_VERSION.replace('.','-')
 
 export default async function (req, res) {
   await NextCors(req, res, {
-    methods: ['GET', 'POST'],
-    origin: '*', // todo
+    methods: ['POST'],
+    origin: process.env.SERVER_URL,
     optionsSuccessStatus: 200,
   })
   console.log('CALLED', req.body) // check why body is empty
