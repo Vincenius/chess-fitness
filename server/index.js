@@ -24,7 +24,7 @@ const callWebhook = body => fetch(`${process.env.WEBHOOK_URL}`, {
     [process.env.AUTH_HEADER]: process.env.AUTH_TOKEN,
   },
   body: JSON.stringify(body),
-}).then(res => res.json())
+}).then(res => res.json()).then(res => console.log(res))
 
 app.get('/', (req, res) => {
   res.status(200).send('Running!')
@@ -37,7 +37,7 @@ app.post('/generate', async (req, res) => {
     res.status(200).send({ id })
 
     console.log('Generated intro:', body)
-    const message = { testy: 'testy' }// await generateIntroduction(body)
+    const message = "{'testy': 'testy'}"// await generateIntroduction(body)
     await callWebhook({ id, result: { introduction: message } })
 
     console.log('Generated chapters:', body)
@@ -45,7 +45,7 @@ app.post('/generate', async (req, res) => {
     //   generateChapter1(body, message),
     //   generateChapter2(body, message)
     // ])
-    const [chapter1, chapter2] = ['yo', 'yoyo']
+    const [chapter1, chapter2] = ["{'testy': 'testy'}", "{'testy': 'testy'}"]
 
     await callWebhook({ id, result: { chapter1, chapter2 } })
     console.log('generation complete')
