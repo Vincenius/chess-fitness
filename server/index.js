@@ -22,7 +22,7 @@ const callWebhook = body => fetch(`${process.env.WEBHOOK_URL}`, {
     [process.env.AUTH_HEADER]: process.env.AUTH_TOKEN,
   },
   body: JSON.stringify(body),
-}).then(res => res.json()).then(res => console.log(res))
+}).then(res => res.json())
 
 app.get('/', (req, res) => {
   res.status(200).send('Running!')
