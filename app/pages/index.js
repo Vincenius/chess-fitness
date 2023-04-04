@@ -7,6 +7,7 @@ import { getOpeningData, refreshData } from '../utils/api'
 import TheoryTab from "../components/TheoryTab/TheroyTab"
 import Autocomplete from '../components/Autocomplete/Autocomplete'
 import Navigation from '../components/Navigation/Navigation'
+import Footer from '../components/Footer/Footer'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
@@ -87,6 +88,7 @@ export default function Home() {
           <TheoryTab data={data} isLoading={isLoading} />
         </div>}
       </main>
+      <Footer />
     </div>
   );
 }

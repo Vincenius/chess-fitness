@@ -1,15 +1,16 @@
-{/* <form method="post" action="https://email.vincenius.com/subscription/form" class="listmonk-form">
-    <div>
-        <h3>Subscribe</h3>
-        <input type="hidden" name="nonce" />
-        <p><input type="email" name="email" required placeholder="E-mail" /></p>
-        <p><input type="text" name="name" placeholder="Name (optional)" /></p>
-      
-        <p>
-          <input id="e5fe2" type="checkbox" name="l" checked value="e5fe2368-d160-4dfb-a644-a848184fde83" />
-          <label for="e5fe2">Chess Fitness</label>
-        </p>
+import React from 'react'
+import Typography from "@mui/material/Typography"
+import styles from './Footer.module.css'
 
-        <p><input type="submit" value="Subscribe" /></p>
-    </div>
-</form> */}
+const Footer = () => {
+  return <footer className={styles.footer}>
+    <Typography variant="subtitle1" color="text.secondary" align="center" className={styles.topText}>
+      Made by <a href="https://vincentwill.com">Vincent</a>. Chess Fitness is free and <a href="https://github.com/vincenius/chess-fitness">open-source</a>!
+    </Typography>
+    <Typography variant="subtitle1" color="text.secondary" align="center">
+      We're still in beta. If you encounter any issues feel free to report them via <a href="mailto:info@wweb.dev">Email</a> or <a href="https://github.com/Vincenius/chess-fitness/issues">GitHub</a>.
+    </Typography>
+  </footer>
+}
+
+export default Footer
