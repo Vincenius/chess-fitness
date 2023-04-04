@@ -17,7 +17,7 @@
 + I plan to add more features in the future. Feel free to leave ideas and feedback in the GitHub issues.
 
 ## Link
-You can find the project at [https://chess.fitness](chess.fitness).
+You can find the project at [chess.fitness](https://chess.fitness)
 
 ## app directory
 [![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js-brightgreen)](https://nextjs.org/)
