@@ -65,7 +65,7 @@ export default function Home() {
         <meta property="og:title" content="Chess Fitness"></meta>
         <meta property="og:description" content="Train Chess Openings with your own AI Coach"></meta>
         <meta property="og:url" content="https://chess.fitness"></meta>
-        <meta property="og:image" content="yourwebsite.com/meta.png"></meta>
+        <meta property="og:image" content="https://chess.fitness/meta.png"></meta>
         <meta property="og:type" content="website"></meta>
 
         <link rel="icon" href="logo.svg" />
