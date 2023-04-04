@@ -107,7 +107,7 @@ const TheoryTab = ({ data = {}, isLoading }) => {
         <Typography gutterBottom variant="h5">{chapter.title}</Typography>
         <p>That's it! I hope you enjoyed the lesson.</p>
         <p>More features like practicing the opening against the AI are in the making.</p>
-        <p>I'd love to hear your feedback and ideas. You can reach me via <a href="mailto:info@wweb.dev">Email</a>, <a href="https://twitter.com/wweb_dev">Twitter</a> or on <a href="https://github.com/Vincenius/chess-fitness/issues">GitHub</a>.</p>
+        <p>I'd love to hear your feedback and ideas. You can reach me via <a href="mailto:info@wweb.dev">Email</a>, <a href="https://twitter.com/wweb_dev">Twitter</a> or on <a href="https://github.com/Vincenius/chess-fitness">GitHub</a>.</p>
         <p>P.S. I'm paying for every request to the AI. Any help paying the running costs is greatly appreciated. It helps me to keep this tool available for free 👇</p>
 
         <Link href='https://ko-fi.com/Y8Y7JYCS3' target='_blank'>
