@@ -52,6 +52,21 @@ export default function Home() {
     <div>
       <Head>
         <title>Chess Fitness | Train Chess Openings with your own AI Coach</title>
+        <meta name="title" content="Chess Fitness"></meta>
+        <meta name="description" content="Train Chess Openings with your own AI Coach"></meta>
+
+        <meta property="twitter:title" content="Chess Fitness"></meta>
+        <meta property="twitter:description" content="Train Chess Openings with your own AI Coach"></meta>
+        <meta property="twitter:image" content="https://chess.fitness/meta.png"></meta>
+        <meta property="twitter:url" content="https://chess.fitness"></meta>
+        <meta property="twitter:card" content="summary_large_image"></meta>
+
+        <meta property="og:title" content="Chess Fitness"></meta>
+        <meta property="og:description" content="Train Chess Openings with your own AI Coach"></meta>
+        <meta property="og:url" content="https://chess.fitness"></meta>
+        <meta property="og:image" content="yourwebsite.com/meta.png"></meta>
+        <meta property="og:type" content="website"></meta>
+
         <link rel="icon" href="logo.svg" />
       </Head>
 
