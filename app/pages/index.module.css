@@ -4,13 +4,25 @@
   justify-content: center;
   padding: 0 30px;
   height: 100%;
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 150px);
   max-width: 900px;
   margin: 0 auto;
 }
 
 .form {
-  display: flex;
-  margin: 20px 0;
-  /* max-width: 600px; */
+  margin: 30px auto 0;
+  width: 100%;
+  max-width: 650px;
+}
+
+.logo {
+  margin: 0 auto 10px;
+}
+
+.headline {
+  font-weight: 100;
+}
+
+.subheading {
+  font-weight: 100;
 }

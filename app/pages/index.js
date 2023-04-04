@@ -6,6 +6,7 @@ import styles from "./index.module.css"
 import { getOpeningData, refreshData } from '../utils/api'
 import TheoryTab from "../components/TheoryTab/TheroyTab"
 import Autocomplete from '../components/Autocomplete/Autocomplete'
+import Navigation from '../components/Navigation/Navigation'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
@@ -50,21 +51,24 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Chess Fitness</title>
+        <title>Chess Fitness | Train Chess Openings with your own AI Coach</title>
         <link rel="icon" href="logo.svg" />
       </Head>
 
       <main className={styles.main}>
         { !isLoading && !data && <>
-          <Image src="/logo.svg" height={200} width={200} style={{ margin: '0 auto 10px' }} alt="strong chess piece logo"/>
-          <Typography variant="h3" textAlign="center" gutterBottom>Chess Fitness</Typography>
+          <Image src="/logo.svg" height={150} width={150} className={styles.logo} alt="strong chess piece logo" />
+          <Typography variant="h3" component="h1" textAlign="center" className={styles.headline}>Chess Fitness</Typography>
+          <Typography variant="subtitle1" component="h2" textAlign="center" gutterBottom className={styles.subheading}>Train Chess Openings with your own AI Coach</Typography>
+
+          <form className={styles.form}>
+            <Autocomplete onSelect={val => onSubmit(val)} />
+            <Typography gutterBottom variant="overline">Enter the name of any opening you want to learn</Typography>
+          </form>
         </> }
-        <form className={styles.form}>
-          <Autocomplete onSelect={val => onSubmit(val)} />
-        </form>
-        { !isLoading && !data && <Typography gutterBottom variant="overline">Enter the name of any opening you want to learn</Typography> }
 
         { (data || isLoading) && <div>
+          <Navigation onSelect={val => onSubmit(val)} opening={data.opening} reset={() => setData(null)}/>
           <TheoryTab data={data} isLoading={isLoading} />
         </div>}
       </main>

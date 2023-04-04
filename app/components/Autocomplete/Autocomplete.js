@@ -4,6 +4,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { debounce } from '@mui/material/utils';
+import CircularProgress from '@mui/material/CircularProgress';
 import { search } from '../../utils/api'
 
 const defaultOpenings = [{
@@ -48,14 +49,18 @@ const defaultOpenings = [{
   "pgn": "1. e4 c6 2. Nc3"
 }]
 
-export default function OpeningAutocomplete({ onSelect }) {
+export default function OpeningAutocomplete({ onSelect, opening }) {
   const [inputValue, setInputValue] = React.useState('')
+  const [isLoading, setIsLoading] = React.useState(false)
   const [options, setOptions] = React.useState([])
   const [value, setValue] = React.useState('')
+  const [open, setOpen] = React.useState(false)
+  const loading = open && isLoading
 
   const fetch = React.useMemo(
     () =>
       debounce(async ({ input }, callback) => {
+        setIsLoading(true)
         const { openings } = await search(input)
         callback(openings)
       }, 300),
@@ -63,15 +68,28 @@ export default function OpeningAutocomplete({ onSelect }) {
   );
 
   React.useEffect(() => {
+    if (opening && !open) {
+      setInputValue(opening.name)
+      setValue(opening.name)
+    }
+  })
+
+  React.useEffect(() => {
+    if (!open) {
+      setOptions([]);
+    }
+  }, [open]);
+
+  React.useEffect(() => {
     let active = true;
 
     if (inputValue === '') {
-      // todo default options
       setOptions(defaultOpenings);
       return undefined;
     }
 
     fetch({ input: inputValue }, (results) => {
+      setIsLoading(false)
       if (active) {
         let newOptions = [];
 
@@ -101,15 +119,31 @@ export default function OpeningAutocomplete({ onSelect }) {
       autoComplete
       filterSelectedOptions
       noOptionsText="no openings found..."
+      onOpen={() => { setOpen(true) }}
+      onClose={() => { setOpen(false) }}
+      loading={loading}
       onChange={(event, newValue) => {
-        onSelect(newValue)
         setValue((newValue && newValue.name) || '')
+        if (newValue && newValue.name) {
+          onSelect(newValue)
+        }
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
       }}
       renderInput={(params) => (
-        <TextField {...params} label="Search an opening" fullWidth />
+        <TextField
+          {...params} label="Search an opening" fullWidth
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <React.Fragment>
+                {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                {params.InputProps.endAdornment}
+              </React.Fragment>
+            ),
+          }}
+        />
       )}
       renderOption={(props, option) => {
         return (
