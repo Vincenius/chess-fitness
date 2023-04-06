@@ -83,7 +83,7 @@ export default function Home() {
           </form>
         </> }
 
-        { (data || isLoading) && <div>
+        { (data || (isLoading && data && data.opening)) && <div>
           <Navigation onSelect={val => onSubmit(val)} opening={data.opening} reset={() => setData(null)}/>
           <TheoryTab data={data} isLoading={isLoading} />
         </div>}

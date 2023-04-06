@@ -9,7 +9,6 @@ export default async function (req, res) {
     origin: '*', // todo
     optionsSuccessStatus: 200,
   })
-  console.log('CALLED', req.body) // check why body is empty
   if (req.headers[process.env.AUTH_HEADER] === process.env.AUTH_TOKEN && req.body && req.body.id) {
     const query = { [`${versionString}.generation_id`]: req.body.id }
     const [openingData = {}] = await getOpeningByQuery(query)

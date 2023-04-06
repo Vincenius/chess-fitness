@@ -35,8 +35,6 @@ const TheoryTab = ({ data = {}, isLoading }) => {
       newIndex++
     }
 
-    console.log(newIndex, subIndex, data[`chapter${newIndex}`])
-
     setSubChapterIndex(subIndex)
     setChapter({
       index: newIndex,
