@@ -57,8 +57,7 @@ This is a NodeJS server that handles the ChatGPT API calls.
 ## Next TODOs
 
 - ai query loading time improvements
-- landing page design
-- footer with newsletter
+- investigate possibility for practicing opening against AI
 
 
 ## Created By
